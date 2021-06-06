@@ -9,14 +9,14 @@
 1. `terraform apply` will provision infrastructure on AWS including webservers and the HAProxy load balancer.
 2. By default HAProxy load balancer is using "Round Robin" technique. But I have also added configuration for "Sticky Session" in the haproxy.cfg file. However, for testing purpose I've commented that configuration. Feel free to comment/uncomment Sticky session
 configuration block.
-`#---------------------------------------------------------------------
+<!--- #---------------------------------------------------------------------
 # round robin balancing between the various backends without
 # Sticky session
 #---------------------------------------------------------------------
 backend http_back
    balance     roundrobin
    server  web1 172.31.17.227:80 check
-   server  web2 172.31.22.76:80 check`
+   server  web2 172.31.22.76:80 check --->
 
 `#---------------------------------------------------------------------
 # round robin balancing between the various backends with
