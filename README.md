@@ -1,5 +1,5 @@
 # Implementation of HAProxy load balancer for web application running on AWS EC2 Instances
-
+***Tools Used: AWS, Terraform, HAProxy, Bash***
 ## Prerequisites:
 1. Clone git repo: https://github.com/rahulvshinde/Alation_Devops_Exercise.git and `cd` into the project directory.
 2. Create your own SSH key pair and save them as mykey and mykey.pub in the project directory. Key pair will be required to ssh to the EC2 instances.
