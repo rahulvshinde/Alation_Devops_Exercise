@@ -56,12 +56,22 @@ frontend http_front
    # !!!: normally you would not want to expose this, only for demo
    # this allows anyone to easily take backends down/up/etc via panel
    stats admin if TRUE
+
 #---------------------------------------------------------------------
-# round robin balancing between the various backends with 
+# round robin balancing between the various backends without
 # Sticky session
 #---------------------------------------------------------------------
 backend http_back
-    balance     roundrobin
-    cookie SRVNAME insert
-    server  web1 ${web1_priv_ip}:80 cookie WA check
-    server  web2 ${web2_priv_ip}:80 cookie WB check
+   balance     roundrobin
+   server  web1 ${web1_priv_ip}:80 check
+   server  web2 ${web2_priv_ip}:80 check
+
+#---------------------------------------------------------------------
+# round robin balancing between the various backends with
+# Sticky session
+#---------------------------------------------------------------------
+#backend http_back
+#    balance     roundrobin
+#    cookie SRVNAME insert
+#    server  web1 ${web1_priv_ip}:80 cookie WA check
+#    server  web2 ${web2_priv_ip}:80 cookie WB check
