@@ -9,23 +9,6 @@ resource "aws_instance" "haproxy-lb" {
     agent       = true
     private_key = file(var.PATH_TO_PRIVATE_KEY)
   }
-  #   provisioner "file" {
-  #     source      = "script.sh"
-  #     destination = "/tmp/script.sh"
-  #   }
-
-  #   provisioner "remote-exec" {
-  #     inline = [
-  #       "sleep 25",
-  #       "chmod +x /tmp/script.sh",
-  #       "sudo /tmp/script.sh"
-  #     ]
-  #   }
-  #   provisioner "remote-exec" {
-  #     inline = [
-  #       "sudo service haproxy restart"
-  #     ]
-  #   }
 
   provisioner "remote-exec" {
     inline = [

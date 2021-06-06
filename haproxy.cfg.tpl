@@ -57,7 +57,8 @@ frontend http_front
    # this allows anyone to easily take backends down/up/etc via panel
    stats admin if TRUE
 #---------------------------------------------------------------------
-# round robin balancing between the various backends
+# round robin balancing between the various backends with 
+# Sticky session
 #---------------------------------------------------------------------
 backend http_back
     balance     roundrobin
