@@ -66,9 +66,9 @@ Expected Output:
 8. Make sure you destroy infrastructure once done by running `terraform destroy`.
 
 ## Advantages of this architecture:
-1. ** HAProxy Load Balancer: ** Highly available, event driven architecture, open source load balancing and proxy solution.
-2. ** AWS: ** Public cloud provider provides tons of services to host the application.
-3. ** Terraform: ** Infrastructure provisioning tool provides Infrastructure as Code (Iac). Quickly provision and setup.
+1. **HAProxy Load Balancer:** Highly available, event driven architecture, open source load balancing and proxy solution.
+2. **AWS:** Public cloud provider provides tons of services to host the application.
+3. **Terraform:** Infrastructure provisioning tool provides Infrastructure as Code (Iac). Quickly provision and setup.
 
 ## Disadvantages of this architecture:
 1. HAProxy host is single point of failure. If the host serving HAProxy load balancer goes down. Application won't be able to serve traffic.
@@ -79,14 +79,14 @@ Expected Output:
   -- As a result, servers with less capacity may overload and fail more quickly while capacity on other servers lie idle.
 
 ## HAProxy Load Balancer Configuration:
-1. ** Round Robin Load Balancing: **
+1. **Round Robin Load Balancing:**
 ```
 backend http_back
    balance     roundrobin
    server  web1 ${web1_priv_ip}:80 check
    server  web2 ${web2_priv_ip}:80 check
 ```
-2. ** Load Balancer Sticky Session: ** A load balancer that keeps sticky sessions will create a unique session object for each client.<br />
+2. **Load Balancer Sticky Session:** A load balancer that keeps sticky sessions will create a unique session object for each client.<br />
   -- For each request from the same client, the load balancer processes the request to the same web server each time, where data is stored and updated as long as the session exists.<br />
   -- Sticky sessions can be more efficient because unique session-related data does not need to be migrated from server to server.<br />
   -- If sticky load balancers are used to load balance round robin style, a user’s first request is routed to a web server using the round robin algorithm.<br />
