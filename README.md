@@ -42,8 +42,8 @@ web2_private_ip = 172.31.22.76
 web2_public_ip = 18.144.39.94
 ```
 5. In order to verify if the load balancing happening as expected run following command.
-</br >`shell> for i in {1..5}; do curl 13.56.138.134; done`
-</br >Expected Output:
+</br>`shell> for i in {1..5}; do curl 13.56.138.134; done`
+</br>Expected Output:
 ```
 <h2>Hello World from: 172.31.22.76</h2>
 <h2>Hello World from: 172.31.17.227</h2>
@@ -53,8 +53,8 @@ web2_public_ip = 18.144.39.94
 ```
 You will see requests getting distributed equally among both web servers.
 6. If we take down one of the web servers, all requests should go to the other web servers.
-</br >`shell> for i in {1..5}; do curl 13.56.138.134; done`
-</br >Expected Output:
+</br>`shell> for i in {1..5}; do curl 13.56.138.134; done`
+</br>Expected Output:
 ```
 <h2>Hello World from: 172.31.22.76</h2>
 <h2>Hello World from: 172.31.22.76</h2>
