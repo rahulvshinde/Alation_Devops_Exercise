@@ -98,3 +98,6 @@ backend http_back
     server  web1 ${web1_priv_ip}:80 cookie WA check
     server  web2 ${web2_priv_ip}:80 cookie WB check
 ```
+
+NOTE: To generate haproxy.cfg file I've referred following document.
+https://www.haproxy.com/blog/the-four-essential-sections-of-an-haproxy-configuration/
