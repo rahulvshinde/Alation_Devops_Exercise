@@ -62,5 +62,39 @@ Expected Output:
 <h2>Hello World from: 172.31.22.76</h2>
 <h2>Hello World from: 172.31.22.76</h2>
 ```
-7. Also, you can check stats by hitting the `/stats` endpoint. 
+7. Also, you can check stats by hitting the `/stats` endpoint.
 8. Make sure you destroy infrastructure once done by running `terraform destroy`.
+
+## Advantages of this architecture:
+1. HAProxy Load Balancer: Highly available, event driven architecture, open source load balancing and proxy solution.
+2. AWS: Public cloud provider provides tons of services to host the application.
+3. Terraform: Infrastructure provisioning tool provides Infrastructure as Code (Iac). Quickly provision and setup.
+
+## Disadvantages of this architecture:
+1. HAProxy host is single point of failure. If the host serving HAProxy load balancer goes down. Application won't be able to serve traffic.
+2. Application does not provide functionality to auto scale web servers. If both web servers goes down, application won't be able to serve traffic.
+3. HAProxy load balancer in configured with "Round Robin" technique to distribute traffic among web servers.
+  -- It's the simplest and easily configurable load balancing technique. The biggest drawback of using the round robin algorithm in load balancing is that the algorithm assumes that servers are similar enough to handle equivalent loads.
+  -- If certain servers have more CPU, RAM, or other specifications, the algorithm has no way to distribute more requests to these servers.
+  -- As a result, servers with less capacity may overload and fail more quickly while capacity on other servers lie idle.
+
+## HAProxy Load Balancer Configuration:
+1. Round Robin Load Balancing:
+```
+backend http_back
+   balance     roundrobin
+   server  web1 ${web1_priv_ip}:80 check
+   server  web2 ${web2_priv_ip}:80 check
+```
+2. Load Balancer Sticky Session: A load balancer that keeps sticky sessions will create a unique session object for each client.
+  -- For each request from the same client, the load balancer processes the request to the same web server each time, where data is stored and updated as long as the session exists.
+  -- Sticky sessions can be more efficient because unique session-related data does not need to be migrated from server to server.
+  -- If sticky load balancers are used to load balance round robin style, a user’s first request is routed to a web server using the round robin algorithm.
+  -- Subsequent requests are then forwarded to the same server until the sticky session expires, when the round robin algorithm is used again to set a new sticky session.
+```
+backend http_back
+    balance     roundrobin
+    cookie SRVNAME insert
+    server  web1 ${web1_priv_ip}:80 cookie WA check
+    server  web2 ${web2_priv_ip}:80 cookie WB check
+```
