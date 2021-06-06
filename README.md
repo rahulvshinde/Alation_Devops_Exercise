@@ -62,3 +62,4 @@ Expected Output:
 <h2>Hello World from: 172.31.22.76</h2>
 <h2>Hello World from: 172.31.22.76</h2>
 ```
+7. Make sure you destroy infrastructure once done by running `terraform destroy`.
